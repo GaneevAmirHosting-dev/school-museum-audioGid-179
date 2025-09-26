@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аудио гиды | Музей "Сквозь года"</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-headphones"></i> Аудио гиды музея
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="https://ganeevamirhosting-dev.github.io/School-museum-179/" class="back-link">
+                        <i class="fas fa-arrow-left"></i> Назад в музей
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+
+    <main class="audio-main">
+
+        <nav class="audio-nav">
+            <div class="nav-container">
+                <h2>Выберите экспозицию:</h2>
+                <div class="audio-buttons">
+                    <button class="audio-btn active" data-audio="exhibit1">
+                        <i class="fas fa-landmark"></i>
+                        <span>НАКАНУНЕ ВОЙНЫ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit2">
+                        <i class="fas fa-fort-awesome"></i>
+                        <span>БРЕСТСКАЯ КРЕПОСТЬ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit3">
+                        <i class="fas fa-city"></i>
+                        <span>БИТВА ПОД МОСКВОЙ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit4">
+                        <i class="fas fa-ambulance"></i>
+                        <span>ВАГОН-ГОСПИТАЛЬ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit5">
+                        <i class="fas fa-industry"></i>
+                        <span>КАЗАНЬ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit6">
+                        <i class="fas fa-tools"></i>
+                        <span>ТЫЛ ФРОНТУ!</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit7">
+                        <i class="fas fa-city"></i>
+                        <span>БЛОКАДНЫЙ ЛЕНИНГРАД</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit8">
+                        <i class="fas fa-home"></i>
+                        <span>СТАЛИНГРАД</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit9">
+                        <i class="fas fa-flag-europe"></i>
+                        <span>ОСВОБОЖДЕНИЕ ЕВРОПЫ</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit10">
+                        <i class="fas fa-flag"></i>
+                        <span>ПОБЕДА</span>
+                    </button>
+                    <button class="audio-btn" data-audio="exhibit11">
+                        <i class="fas fa-monument"></i>
+                        <span>ПАМЯТЬ</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+
+        <section class="audio-info">
+            <div class="info-container">
+                <h1 id="audio-title">НАКАНУНЕ ВОЙНЫ</h1>
+                <p id="audio-description">Аудио гид по экспозиции "Накануне войны"</p>
+                <div class="audio-stats">
+                    <span id="audio-duration">Длительность: 00:00</span>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="audio-player-section">
+            <div class="player-container">
+                <div class="player-controls">
+                    <button id="play-pause-btn" class="control-btn large">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    
+                    <div class="progress-container">
+                        <span id="current-time">0:00</span>
+                        <div class="progress-bar" id="progress-bar">
+                            <div class="progress" id="progress"></div>
+                        </div>
+                        <span id="total-time">0:00</span>
+                    </div>
+
+                    <button id="volume-btn" class="control-btn">
+                        <i class="fas fa-volume-up"></i>
+                    </button>
+                    
+                    <div class="volume-container">
+                        <input type="range" id="volume-slider" min="0" max="100" value="80">
+                    </div>
+
+                    <button id="speed-btn" class="control-btn" title="Скорость воспроизведения">
+                        <span>1x</span>
+                    </button>
+
+                    <button id="download-btn" class="control-btn" title="Скачать аудио">
+                        <i class="fas fa-download"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2025 Виртуальный музей гимназии №179. Все права защищены.</p>
+            <p>Аудио гиды всех экспозиций</p>
+        </div>
+    </footer>
+
+    <audio id="audio-element" preload="metadata"></audio>
+    <script src="audio.js"></script>
+</body>
+</html>
