@@ -4,67 +4,56 @@ const audioGuidesData = {
         title: "НАКАНУНЕ ВОЙНЫ",
         description: "Аудио гид по экспозиции 'Накануне войны'",
         audioFile: "audio/exhibit1.mp3",
-        duration: "5:30"
     },
     exhibit2: {
         title: "БРЕСТСКАЯ КРЕПОСТЬ",
         description: "Аудио гид по экспозиции 'Брестская крепость'",
         audioFile: "audio/exhibit2.mp3",
-        duration: "6:15"
     },
     exhibit3: {
         title: "БИТВА ПОД МОСКВОЙ",
         description: "Аудио гид по экспозиции 'Битва под Москвой'",
         audioFile: "audio/exhibit3.mp3",
-        duration: "7:20"
     },
     exhibit4: {
         title: "ВАГОН-ГОСПИТАЛЬ",
         description: "Аудио гид по экспозиции 'Вагон-госпиталь'",
         audioFile: "audio/exhibit4.mp3",
-        duration: "4:45"
     },
     exhibit5: {
         title: "КАЗАНЬ – ГОРОД ТРУДОВОЙ ДОБЛЕСТИ",
         description: "Аудио гид по экспозиции 'Казань - город трудовой доблести'",
         audioFile: "audio/exhibit5.mp3",
-        duration: "8:10"
     },
     exhibit6: {
         title: "ТЫЛ ФРОНТУ!",
         description: "Аудио гид по экспозиции 'Тыл фронту!'",
         audioFile: "audio/exhibit6.mp3",
-        duration: "5:20"
     },
     exhibit7: {
         title: "БЛОКАДНЫЙ ЛЕНИНГРАД",
         description: "Аудио гид по экспозиции 'Блокадный Ленинград'",
         audioFile: "audio/exhibit7.mp3",
-        duration: "6:45"
     },
     exhibit8: {
         title: "СТАЛИНГРАДСКАЯ БИТВА",
         description: "Аудио гид по экспозиции 'Сталинградская битва'",
         audioFile: "audio/exhibit8.mp3",
-        duration: "7:30"
     },
     exhibit9: {
         title: "ОСВОБОЖДЕНИЕ ЕВРОПЫ",
         description: "Аудио гид по экспозиции 'Освобождение Европы'",
         audioFile: "audio/exhibit9.mp3",
-        duration: "6:15"
     },
     exhibit10: {
         title: "ПОБЕДА",
         description: "Аудио гид по экспозиции 'Победа'",
         audioFile: "audio/exhibit10.mp3",
-        duration: "5:50"
     },
     exhibit11: {
         title: "ПАМЯТЬ",
         description: "Аудио гид по экспозиции 'Память'",
         audioFile: "audio/exhibit11.mp3",
-        duration: "5:00"
     }
 };
 
@@ -204,16 +193,6 @@ function updateActiveButton(audioId) {
     });
 }
 
-function updateAudioInfo(audioId = currentAudioId) {
-    const audioGuide = audioGuidesData[audioId];
-    const titleElement = document.getElementById('audio-title');
-    const descElement = document.getElementById('audio-description');
-    const durationElement = document.getElementById('audio-duration');
-    
-    if (titleElement) titleElement.textContent = audioGuide.title;
-    if (descElement) descElement.textContent = audioGuide.description;
-    if (durationElement) durationElement.textContent = `Длительность: ${audioGuide.duration}`;
-}
 
 
 function loadAudio(audioId) {
@@ -327,24 +306,6 @@ function updateProgressBar() {
         currentTimeElement.textContent = formatTime(audioElement.currentTime);
     }
 }
-
-
-function updateTotalTime() {
-    const totalTimeElement = document.getElementById('total-time');
-    if (audioElement.duration) {
-        totalTimeElement.textContent = formatTime(audioElement.duration);
-    }
-}
-
-
-function formatTime(seconds) {
-    if (isNaN(seconds)) return '0:00';
-    
-    const minutes = Math.floor(seconds / 60);
-    seconds = Math.floor(seconds % 60);
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-}
-
 
 function handleAudioEnd() {
     isPlaying = false;
