@@ -195,30 +195,6 @@ function updateActiveButton(audioId) {
 
 
 
-function loadAudio(audioId) {
-    console.log('loadAudio called with:', audioId);
-    
-    const audioGuide = audioGuidesData[audioId];
-    if (!audioGuide) {
-        console.error('Данные аудио гида не найдены:', audioId);
-        return;
-    }
-
-    currentAudioId = audioId;
-
-
-    audioElement.src = audioGuide.audioFile;
-    
-
-    audioElement.currentTime = 0;
-    
-
-    audioElement.addEventListener('loadeddata', function() {
-        updateTotalTime();
-    }, { once: true });
-}
-
-
 function togglePlayPause() {
     if (!audioElement.src) return;
     
@@ -296,20 +272,89 @@ function changePlaybackSpeed() {
 }
 
 
-function updateProgressBar() {
-    const progress = document.getElementById('progress');
-    const currentTimeElement = document.getElementById('current-time');
+function updateAudioInfo(audioId = currentAudioId) {
+    const audioGuide = audioGuidesData[audioId];
+    const titleElement = document.getElementById('audio-title');
+    const descElement = document.getElementById('audio-description');
+    const durationElement = document.getElementById('audio-duration');
     
-    if (audioElement.duration) {
-        const percent = (audioElement.currentTime / audioElement.duration) * 100;
-        progress.style.width = percent + '%';
-        currentTimeElement.textContent = formatTime(audioElement.currentTime);
-    }
+    if (titleElement) titleElement.textContent = audioGuide.title;
+    if (descElement) descElement.textContent = audioGuide.description;
+    if (durationElement) durationElement.textContent = `Длительность: ${audioGuide.duration}`;
 }
+
+
+
 
 function handleAudioEnd() {
     isPlaying = false;
     updatePlayButton();
+}
+
+
+
+function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+}
+
+
+function updateTotalTime() {
+    const totalTimeElement = document.getElementById('total-time');
+    if (totalTimeElement && audioElement.duration) {
+        totalTimeElement.textContent = formatTime(audioElement.duration);
+    }
+}
+
+function loadAudio(audioId) {
+    console.log('loadAudio called with:', audioId);
+    
+    const audioGuide = audioGuidesData[audioId];
+    if (!audioGuide) {
+        console.error('Данные аудио гида не найдены:', audioId);
+        return;
+    }
+
+    currentAudioId = audioId;
+
+
+    const currentTimeElement = document.getElementById('current-time');
+    const totalTimeElement = document.getElementById('total-time');
+    if (currentTimeElement) currentTimeElement.textContent = '0:00';
+    if (totalTimeElement) totalTimeElement.textContent = '0:00';
+
+    audioElement.src = audioGuide.audioFile;
+    audioElement.currentTime = 0;
+    
+
+    audioElement.addEventListener('loadedmetadata', function() {
+        updateTotalTime();
+        updateProgressBar();
+    }, { once: true });
+    
+
+    audioElement.addEventListener('loadeddata', function() {
+        updateTotalTime();
+        updateProgressBar();
+    }, { once: true });
+}
+
+function updateProgressBar() {
+    const progress = document.getElementById('progress');
+    const currentTimeElement = document.getElementById('current-time');
+    const totalTimeElement = document.getElementById('total-time');
+    
+    if (audioElement.duration && !isNaN(audioElement.duration)) {
+        const percent = (audioElement.currentTime / audioElement.duration) * 100;
+        progress.style.width = percent + '%';
+        currentTimeElement.textContent = formatTime(audioElement.currentTime);
+        
+
+        totalTimeElement.textContent = formatTime(audioElement.duration);
+    }
 }
 
 
